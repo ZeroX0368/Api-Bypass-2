@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/bypass', methods=['GET'])
+@app.route('/api/bypass', methods=['GET'])
 def bypass_url():
     try:
         url = request.args.get('url')
@@ -60,5 +60,13 @@ def bypass_url():
     except Exception as e:
         return jsonify({"error": "Lỗi xử lý URL"}), 500
 
+@app.route('/', methods=['GET'])
+def list_endpoints():
+    endpoints = {
+        "/api/bypasṣ?url=": "rekonise",
+        "/api/bypass?url=": "pastebin bypass",
+    }
+    return jsonify(endpoints)
+    
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=5000)
